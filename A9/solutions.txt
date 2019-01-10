@@ -1,0 +1,39 @@
+Name: Abhinav Goyal
+Roll number: 150050108
+========================================
+
+
+================
+     TASK 2
+================
+
+
+1. Run your code on datasets/garden.csv, with different values of k. Looking at the performance plots, does the SSE of k-means algorithm ever increase as the iterations are made? (1 mark)
+Answer:	Observing the plot for several values of k (k=1 to k=40), I conclude that SSE of k-means algorithm never increases (assuming distance function used is euclidean). This is because of the fact that each step of k-means algorithm decreases SSE (as proved mathematically in class) and that is also the reason why the algorithm is guaranteed to converge.
+
+3. Look at the files 3lines.png and mouse.png. Manually draw cluster boundaries around the 3 clusters visible in each file (no need to submit the hand drawn clusters). Test the k-means algorithm on the datasets datasets/3lines.csv and datasets/mouse.csv. How does the algorithm’s clustering compare with the clustering you would do by hand? Why do you think this happens? (1 mark)
+Answer:
+
+3lines -- I would cluster the set in 3 clusters (each line of points in one cluster). k-means on this dataset (with k=3) doesn't cluster the dataset in the same way as done by hand (in fact it is entirely different). This is because k-means uses SSE as the loss metric and tries to minimize that. In the clustering done by hand, the means would be at the center of each line which makes SSE higher than the clustering done by k-means (because points far away from the midpoint of the line contribute highly to SSE). Here if the means are chosen to be those chosen by k-means algorthim, SSE is lower (since the points are now more near to their cluster mean).
+
+mouse -- Here also, I would cluster the dataset in 3 clusters (two small and one big). The clustering given by k-means algorithm is slightly similar but here the clusters are of roughly the same size (instead of 2 small and 1 big). This is again because of k-means algorithm using SSE as the performance metric. In the clustering done by hand, the points in the big cluster which are relatively more near to the smaller ones contrubute highly to SSE. If these points are shifted to the clusters they are more near to, SSE will decrease and this is why in clustering by k-means, these points are indeed in other clusters.
+
+
+
+================
+     TASK 3
+================
+
+1. For each dataset, with kmeansplusplus initialization algorithm, report “average SSE” and "average iterations". (1 mark)
+Answer:
+
+Dataset     |  Initialization | Average SSE  | Average Iterations
+==================================================================
+   100.csv  |        forgy    |8472.63311469| 2.43
+   100.csv  |        kmeans++ |8472.63311469| 2.02
+  1000.csv  |        forgy    |21337462.2968| 3.28    
+  1000.csv  |        kmeans++ |19552631.8336| 3.00    
+ 10000.csv  |        forgy    |168842238.612| 21.1    
+ 10000.csv  |        kmeans++ |25298526.1574| 7.60
+
+The avg. SSE and avg. number of iterations both are lesser when we use k-means++ initialization as compared to forgy. This is because forgy initializes using a random strategy where as k-means++ uses a better heuristics. k-means++ in some sense chooses initial clustering which spreads out the k initial centers which intuitively reduces the distance between a point and it's nearest cluster center. We choose first center randomly and for the subsequent centers, we randomly choose a point such that it's probability of getting chosen is higher if it is farther from the nearest already chosen center. Such a better initialization may lead to a better local minimum and therefore the SSE is lower in k-means++. Also, initially being closer to local optimal solution (compared to forgy), it takes lesser number of iterations for k-means++ to converge.

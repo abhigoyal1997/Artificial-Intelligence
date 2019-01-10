@@ -1,0 +1,10 @@
+Question 1:
+	The sonar readings observed provide an estimate of the Manhattan distance to each ghost. This can at most provide Pacman a region where the ghost can be located. To get an exact location of the ghost, Pacman needs more readings from different observation points which then can be used together. For example, say stationary Pacman (after significant number of readings from the same observation point) knows with high confidence that there is a ghost at a Manhattan distance of 5. There can be more than one locations in the game with Manhattan distance of 5 from Pacman and therefore Pacman can't know the exact location of the ghost even after an infinite number of readings from the same observation point.
+		This can be observed in test case test_cases/q1/2-ExactObserve.test. Here, even after a significant number of readings, there are 4 equally possible locations of the ghost because these 4 locations are at equal distance from Pacman.
+
+Question 2:
+	The differences can be observed in following test case:
+		test_cases/q2/2-ExactElapse.test
+		test_cases/q2/3-ExactElapse.test
+
+	These difference emerge because with each time step, the belief get more biased towards the south direction. Since the behaviuor of the ghosts is known, with each time step we update the belief. In these particular test cases, the behaviour of ghosts is to go towards south (can be seen from the test files). Starting from a uniform belief, since the ghost's behaviour in these test cases is to go towards south, the belief that the ghost is in the southern region gets stronger and that it is in the northern region gets weaker. This is the reason the squares in the southern region get lighter (belief gets stronger) and those in the northern region get darker (belief gets weaker).

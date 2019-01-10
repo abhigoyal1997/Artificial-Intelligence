@@ -1,0 +1,19 @@
+Graph observations and descriptions:
+
+1. Variation with number of training data points 'seen':
+	
+	The general trend is increasing accuracy with increase in the number of training data points seen though the rate of increase is decreasing. This may be because as the number of training data points seen increases, the effect of more points decreases (the change in weights can be small as compared to their actual value after a lot of data points have been seen).
+
+	Also, from the graph it can be observed that the rate of increase in accuracy is very high till 1000 (no. of training data points seen) but after 1000 it's very low. This may be because after 1000, since training data size is 1000, the classifier sees old data points again which doesn't have much effect compared to new data points which it sees for the first time (also, it's possible that most of them are already classified correctly after the first iteration which again reduces the effect of seeing the same points again).
+
+
+2. Variation with training set size in each iteration:
+
+	Here also the general trend is increase in accuracy with increase in training set size but the graph also has some contradictory decreases. It can be observed that at some points the accuracy falls even though the training set size is increased. This is because the perceptron is very sensitive to the training data. If the training data is not properly distributed, it can cause the perceptron to develop a bias towards some features which makes it perform poorly. Here this might be the cause of the falls. The added training data (to increase the training set size) may not be properly distributed (biased towards some classes or some features).
+
+
+Answer to the questions:
+
+1. With 1000 data points, the test accuracy is 74% (not close to 100%). This is because the perceptron is trained using a different set of points and the points in test set can be the ones never seen by the perceptron before (or not very strongly correlated to the training data points). Also, even if all the test points are already seen, the accuracy still can be less than 100%. If the training data itself is not linearly separable, even the training accuracy will be less than 100% (no matter how many iterations are performed) and so even if the test data is a part of training data (or very strongly correlated to training data) the accuracy can be lower than 100%.
+
+2. A classifier which doesn't use any training data can use the test data itself to learn. It can start from some classification strategy and improve itself as it sees more test data points (using some heuristics which tell how to improve when some test data point is seen). For this data set (handwritten digit recognition), the classifier can also use the correctly predicted test data points to generate new data points using different techniques (using transformations, distortions, adding noise etc.). The accuracy of such a classifier is supposed to increase as it keeps on seeing new data points. So, ideally such a classifier should improve whenever it sees new data points (assuming the data set itself is not biased towards some classes or order).

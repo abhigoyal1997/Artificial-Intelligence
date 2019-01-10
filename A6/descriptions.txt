@@ -1,0 +1,16 @@
+Task 1:
+	For initializing uniformly, I just iterate over the legal positions and wrap around them when required to get particles.
+	For getting the belief, I count the occurances of each particle and then normalize.
+	For observe, if the ghost is in jail, set all the particles the jail position. Otherwise, set weight of each particle as the likelihood of observation (here emmisionModel). WeightedBelief is simply the old belief multiplied with the weight of that corresponding particle key. After this to get the particles, sample from the weightedBelief distribution.
+
+Task 2:
+	For each particle of time step t, I generate a new particle for time step t+1 by sampling from the transition model assuming state at time t was as described by particle at time t.
+
+Task 3:
+	This is done in the same way as the first part.
+	For initialization, generate all the legal states by itertools, suffle them randomly and then generate particles (in a way similar to task 1).
+	For belief distribution, the same method as in Task 1 is used.
+	For observe also I proceed in the same manner as Task 1 except that if a ghost is in jail, I update the ghost's position in each particle and otherwise I multiply the likelihood of the corresponding observation to the weight of the particle. Then I create the weighted belief of new particles (if generated due to some ghosts going into jail) and generate new un weighted particles by sampling from the weighted belief.
+
+Task 4:
+	For each particle of time step t, I generate a new particle for time step t+1 by updating each ghost's position as that sampled from its transition model (depending on position of all ghosts at time t) assuming state at time t was as described by particle at time t.
